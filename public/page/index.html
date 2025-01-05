@@ -1,0 +1,708 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/output.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Mazano Shop</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        font-family: "Poppins", serif;
+        /* border:  1px solid red !important;  */
+      }
+
+      .container {
+        width: 100%;
+        height: 100vh;
+      }
+
+      .wrap {
+        width: 100%;
+        min-height: 100vh;
+      }
+      /* nav */
+      .nav{
+        position: sticky;
+        top: 0;
+        z-index: 1000; /* Pastikan navbar di atas konten lainnya */
+        background-color: transparent; /* Latar belakang transparan saat tidak di-scroll */
+        transition: background-color 0.3s ease; /* Transisi halus */
+      }
+      .nav.sticky {
+        background-color: orange; /* Latar belakang oranye saat sticky */
+      }
+      /* header */
+      header {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* padding: 0 4rem; */
+        background-color: #f9f9f9;
+        overflow: hidden;
+      }
+
+      .decorative-circle {
+        position: absolute;
+        top: 10%;
+        right: 10%;
+        width: 60%;
+        height: 60%;
+        border-radius: 50%;
+        background: rgba(255, 165, 0, 0.1);
+        z-index: 0;
+      }
+      .slider {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      .slide.active {
+        z-index: 10;
+        opacity: 1;
+      }
+
+      .dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50px;
+        background-color: #ff9f43;
+        cursor: pointer;
+        transition: width 0.3s ease-in-out, height 0.3s ease-in-out,
+          background-color 0.3s ease-in-out;
+      }
+
+      .dot.active {
+        width: 50px;
+        background-color: #333;
+      }
+      .decorative-circle {
+        position: absolute;
+        top: 10%;
+        right: 10%;
+        width: 60%;
+        height: 60%;
+        border-radius: 50%;
+        background: rgba(255, 165, 0, 0.1);
+        z-index: 0;
+      }
+      /* main-content */
+      .main-content {
+        width: 100%;
+        height: auto;
+      }
+      .food-content {
+        width: 100%;
+      }
+      .icon-food {
+        width: 100%;
+      }
+      .fade-in {
+        animation: fadeIn 0.3s ease-in-out forwards; /* Animasi fade-in */
+      }
+      .fade-out {
+        animation: fadeOut 0.3s ease-in-out forwards; /* Animasi fade-out */
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px); /* Memindahkan sedikit ke atas */
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0); /* Kembali ke posisi semula */
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+          transform: translateY(0); /* Posisi awal */
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-10px); /* Memindahkan sedikit ke atas */
+        }
+      }
+
+      .fade-out {
+        animation: fadeOut 0.3s ease-in-out forwards; /* Animasi fade-out */
+      }
+
+      .fade {
+        animation: fadeIn 0.5s ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="flex justify-center">
+    <div class="container">
+      <div class="wrap">
+        <!-- nav -->
+        <nav class="nav p-5 w-full" id="nav">
+          <div class="nav-section w-full">
+            <div class="nav-menu flex justify-between items-center">
+              <div class="nav-title">
+                <h1 class="font-semibold text-2xl md:text-4xl sm:text-4xl">Mazano.</h1>
+              </div>
+              <div class="menu hidden sm:hidden lg:flex">
+                <ul class="flex list-none">
+                  <a
+                    href=""
+                    class="mr-1 py-1 hover:bg-[#FF6F3C] hover:text-white rounded-md transition duration-300 ease-in-out"
+                  >
+                    <li class="mx-6 text-base">HOME</li>
+                  </a>
+                  <a
+                    href=""
+                    class="mx-1 py-1 hover:bg-[#FF6F3C] hover:text-white rounded-md transition duration-300 ease-in-out"
+                  >
+                    <li class="mx-6 text-base">FRESHFOOD</li>
+                  </a>
+                  <a
+                    href=""
+                    class="mx-1 py-1 hover:bg-[#FF6F3C] hover:text-white rounded-md transition duration-300 ease-in-out"
+                  >
+                    <li class="mx-6 text-base">SHOP</li>
+                  </a>
+                  <a
+                    href=""
+                    class="mx-1 py-1 hover:bg-[#FF6F3C] hover:text-white rounded-md transition duration-300 ease-in-out"
+                  >
+                    <li class="mx-6 text-base">BLOG</li>
+                  </a>
+                  <a
+                    href=""
+                    class="mx-1 py-1 hover:bg-[#FF6F3C] hover:text-white rounded-md transition duration-300 ease-in-out"
+                  >
+                    <li class="mx-6 text-base">BOOKMARK</li>
+                  </a>
+                </ul>
+              </div>
+              <div class="icon hidden items-center sm:hidden lg:flex">
+                <a href="#" class="search-icon">
+                  <i
+                    class="bx bx-search text-xl mx-2 hover:bg-[#ff9f43] hover:text-white p-1 rounded-md transition duration-300 ease-in-out"
+                  ></i>
+                </a>
+                <i
+                  class="bx bx-cart text-xl mx-2 hover:bg-[#ff9f43] hover:text-white p-1 rounded-md transition duration-300 ease-in-out"
+                ></i>
+                <i
+                  class="bx bx-user text-xl mx-2 hover:bg-[#ff9f43] hover:text-white p-1 rounded-md transition duration-300 ease-in-out"
+                ></i>
+              </div>
+              <!-- menu icon -->
+              <button class="lg:hidden md:text-2xl sm:text-2xl">
+                <i class="bx bx-menu-alt-right"></i>
+              </button>
+            </div>
+          </div>
+          <div class="nav-search flex justify-center">
+            <div class="search-menu w-96 absolute top-16 z-10 hidden">
+              <div class="flex">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  class="bg-[#F0F0F0] text-[rgb(51,51,51)] w-full px-4 rounded-3xl"
+                />
+                <i
+                  class="bx bx-x text-xl bg-[#efefef] p-2 rounded-full border-solid border-2 border-black hover:bg-[#3d3d3d] hover:text-white transition duration-300 ease-in-out close-search mx-2"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- header content -->
+        <header>
+          <div class="slider sm:w-auto w-auto">
+            <div class="slide active flex items-center justify-center">
+              <div class="head-content w-full">
+                <article class="ml-8 w-auto">
+                  <div>
+                    <div class="my-4">
+                      <h1 class="text-4xl font-semibold sm:text-5xl md:text-6xl lg:text-7xl">Tiramisu</h1>
+                      <h1 class="text-4xl font-semibold sm:text-5xl md:text-6xl lg:text-7xl">Dessert</h1>
+                    </div>
+                    <p class="text-xs w-auto my-2 md:text-base lg:text-lg">
+                      Enjoy delicious Italian desserts with a limited 20%
+                      discount, only valid from December to January 25, hurry up
+                      and try it!
+                    </p>
+                    <button class="bg-orange-300 px-5 py-2 my-6 rounded-md">
+                      Shop Now
+                    </button>
+                  </div>
+                </article>
+              </div>
+              <figure class="image-header">
+                <img class="w-full h-full object-contain" src="/portofolio/public/image/meatball.png" alt="Spageti Bolognese"/>
+              </figure>
+              <div class="decorative-circle"></div>
+            </div>
+            <!-- slide 2 -->
+
+          </div>
+          <div class="dots"></div>
+        </header>
+
+        <!-- food content -->
+        <main class="main-content">
+          <div class="food-content">
+            <!-- navigation-menu -->
+            <nav class="menu-content w-full mt-5 py-3 px-3">
+              <div class="menu-food bg-transparent flex justify-between items-center">
+                <div>
+                  <h1 class="border-l-2 border-orange-400 px-2 text-lg font-medium">
+                    FEATURED PRODUCTS
+                  </h1>
+                </div>
+                <button class="bg-orange-300 px-6 py-2 rounded-md text-base">
+                  SHOW ALL ITEMS
+                </button>
+              </div>
+            </nav>
+            <!-- all food content -->
+            <div class="all-food-menu w-full p-3">
+              <!-- all food -->
+              <div class="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-5">
+                <a href="/portofolio/public/page/show.html">
+                  <figure class="relative group">
+                    <img
+                      class="w-full rounded-md h-36 object-cover"
+                      src="/portofolio/public/image/Tea Connection.jpg"
+                      alt=""
+                    />
+                    <div
+                      class="icon-food absolute inset-0 bottom-28  flex justify-center items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    >
+                      <i
+                        class="bx bx-heart text-xl text-black bg-white p-2 rounded-full hover:bg-[#ff9f43] hover:text-white transition duration-300 ease-in-out ml-2"
+                      ></i>
+                      <i
+                        class="bx bx-show-alt text-xl text-black bg-white p-2 rounded-full hover:bg-[#ff9f43] hover:text-white transition duration-300 ease-in-out ml-2"
+                      ></i>
+                    </div>
+                  <!-- button food & food -->
+                   <div class="mt-3">
+                    <div>
+                      <h1 class="font-semibold">SPAGHETTI BOLOGNESE</h1>
+                      <p class="text-slate-700 my-2">$85.00</p>
+                    </div>
+                    <div class="flex items-center">
+                      <button class="bg-slate-200 w-full p-1 text-lg rounded-full">
+                        <i class="bx bx-plus text-base flex items-center"></i>
+                        ADD
+                      </button>
+                    </div>
+                   </div>
+                  </figure>
+                </a>
+                <a href="/portofolio/public/page/show.html">
+                  <figure class="relative group">
+                    <img
+                      class="w-full rounded-md h-36 object-cover"
+                      src="/portofolio/public/image/Tea Connection.jpg"
+                      alt=""
+                    />
+                    <div
+                      class="icon-food absolute inset-0 bottom-28  flex justify-center items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    >
+                      <i
+                        class="bx bx-heart text-xl text-black bg-white p-2 rounded-full hover:bg-[#ff9f43] hover:text-white transition duration-300 ease-in-out ml-2"
+                      ></i>
+                      <i
+                        class="bx bx-show-alt text-xl text-black bg-white p-2 rounded-full hover:bg-[#ff9f43] hover:text-white transition duration-300 ease-in-out ml-2"
+                      ></i>
+                    </div>
+                  <!-- button food & food -->
+                   <div class="mt-3">
+                    <div>
+                      <h1 class="font-semibold">SPAGHETTI BOLOGNESE</h1>
+                      <p class="text-slate-700 my-2">$85.00</p>
+                    </div>
+                    <div class="flex items-center">
+                      <button class="bg-slate-200 w-full p-1 text-lg rounded-full">
+                        <i class="bx bx-plus text-base flex items-center"></i>
+                        ADD
+                      </button>
+                    </div>
+                   </div>
+                  </figure>
+                </a>
+                <a href="/portofolio/public/page/show.html">
+                  <figure class="relative group">
+                    <img
+                      class="w-full rounded-md h-36 object-cover"
+                      src="/portofolio/public/image/Tea Connection.jpg"
+                      alt=""
+                    />
+                    <div
+                      class="icon-food absolute inset-0 bottom-28  flex justify-center items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    >
+                      <i
+                        class="bx bx-heart text-xl text-black bg-white p-2 rounded-full hover:bg-[#ff9f43] hover:text-white transition duration-300 ease-in-out ml-2"
+                      ></i>
+                      <i
+                        class="bx bx-show-alt text-xl text-black bg-white p-2 rounded-full hover:bg-[#ff9f43] hover:text-white transition duration-300 ease-in-out ml-2"
+                      ></i>
+                    </div>
+                  <!-- button food & food -->
+                   <div class="mt-3">
+                    <div>
+                      <h1 class="font-semibold">SPAGHETTI BOLOGNESE</h1>
+                      <p class="text-slate-700 my-2">$85.00</p>
+                    </div>
+                    <div class="flex items-center">
+                      <button class="bg-slate-200 w-full p-1 text-lg rounded-full">
+                        <i class="bx bx-plus text-base flex items-center"></i>
+                        ADD
+                      </button>
+                    </div>
+                   </div>
+                  </figure>
+                </a>
+                <a href="/portofolio/public/page/show.html">
+                  <figure class="relative group">
+                    <img
+                      class="w-full rounded-md h-36 object-cover"
+                      src="/portofolio/public/image/Tea Connection.jpg"
+                      alt=""
+                    />
+                    <div
+                      class="icon-food absolute inset-0 bottom-28  flex justify-center items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    >
+                      <i
+                        class="bx bx-heart text-xl text-black bg-white p-2 rounded-full hover:bg-[#ff9f43] hover:text-white transition duration-300 ease-in-out ml-2"
+                      ></i>
+                      <i
+                        class="bx bx-show-alt text-xl text-black bg-white p-2 rounded-full hover:bg-[#ff9f43] hover:text-white transition duration-300 ease-in-out ml-2"
+                      ></i>
+                    </div>
+                  <!-- button food & food -->
+                   <div class="mt-3">
+                    <div>
+                      <h1 class="font-semibold">SPAGHETTI BOLOGNESE</h1>
+                      <p class="text-slate-700 my-2">$85.00</p>
+                    </div>
+                    <div class="flex items-center">
+                      <button class="bg-slate-200 w-full p-1 text-lg rounded-full">
+                        <i class="bx bx-plus text-base flex items-center"></i>
+                        ADD
+                      </button>
+                    </div>
+                   </div>
+                  </figure>
+                </a>
+                <a href="/portofolio/public/page/show.html">
+                  <figure class="relative group">
+                    <img
+                      class="w-full rounded-md h-36 object-cover"
+                      src="/portofolio/public/image/Tea Connection.jpg"
+                      alt=""
+                    />
+                    <div
+                      class="icon-food absolute inset-0 bottom-28  flex justify-center items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    >
+                      <i
+                        class="bx bx-heart text-xl text-black bg-white p-2 rounded-full hover:bg-[#ff9f43] hover:text-white transition duration-300 ease-in-out ml-2"
+                      ></i>
+                      <i
+                        class="bx bx-show-alt text-xl text-black bg-white p-2 rounded-full hover:bg-[#ff9f43] hover:text-white transition duration-300 ease-in-out ml-2"
+                      ></i>
+                    </div>
+                  <!-- button food & food -->
+                   <div class="mt-3">
+                    <div>
+                      <h1 class="font-semibold">SPAGHETTI BOLOGNESE</h1>
+                      <p class="text-slate-700 my-2">$85.00</p>
+                    </div>
+                    <div class="flex items-center">
+                      <button class="bg-slate-200 w-full p-1 text-lg rounded-full">
+                        <i class="bx bx-plus text-base flex items-center"></i>
+                        ADD
+                      </button>
+                    </div>
+                   </div>
+                  </figure>
+                </a>
+              </div>
+            </div>
+            <!-- category food -->
+            <div class="my-5 px-3">
+              <div>
+                <div class=" w-full py-2 mt-5">
+                  <h1 class="text-lg font-medium text-center lg:text-left lg:border-l-2 lg:border-orange-400 lg:px-2">FOOD CATEGORY</h1>
+                </div>
+                <div class="flex flex-wrap justify-center gap-10 mt-5 sm:flex-wrap lg:flex lg:items-center lg:justify-start">
+                  <figure class="">
+                    <img
+                      class="w-auto h-20 object-cover rounded-full border-solid border-4 border-[#F7C331] p-1"
+                      src="/portofolio/public/image/bread.jpeg"
+                      alt=""
+                    />
+                    <p class="my-2 text-lg text-center">Bread</p>
+                </figure>
+                <figure class="">
+                    <img
+                      class="w-auto h-20 object-cover rounded-full border-solid border-4 border-[#F7C331] p-1"
+                      src="/portofolio/public/image/bread.jpeg"
+                      alt=""
+                    />
+                    <p class="my-2 text-lg text-center">Bread</p>
+                </figure>
+                <figure class="">
+                    <img
+                      class="w-auto h-20 object-cover rounded-full border-solid border-4 border-[#F7C331] p-1"
+                      src="/portofolio/public/image/bread.jpeg"
+                      alt=""
+                    />
+                    <p class="my-2 text-lg text-center">Bread</p>
+                </figure>
+                <figure class="">
+                    <img
+                      class="w-auto h-20 object-cover rounded-full border-solid border-4 border-[#F7C331] p-1"
+                      src="/portofolio/public/image/bread.jpeg"
+                      alt=""
+                    />
+                    <p class="my-2 text-lg text-center">Bread</p>
+                </figure>
+                <figure class="">
+                    <img
+                      class="w-auto h-20 object-cover rounded-full border-solid border-4 border-[#F7C331] p-1"
+                      src="/portofolio/public/image/bread.jpeg"
+                      alt=""
+                    />
+                    <p class="my-2 text-lg text-center">Bread</p>
+                </figure>
+                <figure class="">
+                    <img
+                      class="w-auto h-20 object-cover rounded-full border-solid border-4 border-[#F7C331] p-1"
+                      src="/portofolio/public/image/bread.jpeg"
+                      alt=""
+                    />
+                    <p class="my-2 text-lg text-center">Bread</p>
+                </figure>
+                </div>
+              </div>
+            </div>
+            <!-- blog sesion -->
+            <article class="food-article  my-4">
+                <!-- article -->
+                <div class="article-content w-full px-3">
+                    <article class="bg-transparent w-full">
+                      <div class="food-title-head bg-transparent w-full py-2 mt-5">
+                        <h1 class="border-l-2 border-orange-400 px-2 text-lg font-medium">
+                          FROM OUR BLOG
+                        </h1>
+                      </div>
+                     <div class="grid grid-cols-2 gap-6 mt-2 lg:grid-cols-6 md:grid-cols-3">
+                      <figure class="figure-content bg-transparent group">
+                        <img
+                          class="w-full h-32 object-contain rounded-md transition-transform duration-300 group-hover:scale-110"
+                          src="/portofolio/public/image/POPULAR Spring Menu —Director Photographer Moriah Sawtelle.jpg"
+                          alt=""
+                        />
+                        <div class="bg-transparent w-full my-2">
+                          <h3 class="font-medium text-base line-clamp-2 w-auto">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptatum illum, consequuntur maxime veniam reiciendis tempora quod? Nam, eligendi cupiditate.
+                          </h3>
+                          <!-- button read -->
+                           <a href="">
+                            <button class="flex items-center text-sm mt-1">
+                              Read Now
+                              <i class="bx bx-right-arrow-alt flex items-center text-sm"></i>
+                             </button>
+                           </a>
+                        </div>
+                      </figure> 
+                     </div>
+                    </article>
+                </div>
+            </article>
+          </div>
+        </main>
+        <!-- footer -->
+        <footer class="footer bg-[#8E4E38] w-full">
+          <div class="footer-wrap px-4">
+            <div class="bg-transparent py-4 border-b-2 border-[#F5F5DC]">
+              <div class="flex flex-wrap justify-center gap-10 sm:flex-wrap sm:flex sm:justify-center lg:flex lg:justify-between sm:gap-10">
+                <article class="footer-title">
+                  <div>
+                    <h1 class="text-5xl font-semibold text-[#F5F5DC]">
+                      Mazano.
+                    </h1>
+                  </div>
+                  <div class="my-6">
+                    <p class="text-sm w-72 line-clamp-3 text-[#F5F5DC]">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                      sint occaecat cupidatat non proident, sunt in culpa qui
+                      officia deserunt mollit anim id est laborum
+                    </p>
+                  </div>
+                  <div>
+                    <p class="flex items-center text-xs my-2 text-[#F5F5DC]">
+                      <i class="bx bxs-phone text-xl mr-2"></i>
+                      (123)-456-7890
+                    </p>
+                    <p class="flex items-center text-xs text-[#F5F5DC]">
+                      <i class="bx bx-envelope text-xl mr-2"></i>
+                      Rajasuki@gmail.com
+                    </p>
+                  </div>
+                </article>
+                <section class="flex">
+                  <figure class="mx-5">
+                    <ul>
+                      <h5 class="font-semibold text-sm md:text-base  text-[#F5F5DC]">CATEGORIES</h5>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                    </ul>
+                  </figure>
+                  <figure class="mx-5">
+                    <ul>
+                      <h5 class="font-semibold text-sm md:text-base  text-[#F5F5DC]">CATEGORIES</h5>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                    </ul>
+                  </figure>
+                  <figure class="mx-5">
+                    <ul>
+                      <h5 class="font-semibold text-sm md:text-base  text-[#F5F5DC]">CATEGORIES</h5>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="text-sm my-5 list-none text-[#F5F5DC]">
+                          Life Style
+                        </li>
+                      </a>
+                    </ul>
+                  </figure>
+                </section>
+              </div>
+            </div>
+            <div class="bg-transparent p-3 flex justify-center">
+              <div class="flex items-center">
+                <div class="flex items-center">
+                  <i class="bx bx-copyright text-sm text-[#F5F5DC] mx-1"></i>
+                  <p class="text-[#F5F5DC]">Skyy4onee</p>
+                </div>
+                <div class="flex items-center mx-2">
+                  <i
+                    class="bx bxl-facebook mx-2 text-lg border-solid border-2 border-[#F5F5DC] p-2 rounded-full"
+                  ></i>
+                  <i
+                    class="bx bxl-instagram mx-2 text-lg border-solid border-2 border-[#F5F5DC] p-2 rounded-full"
+                  ></i>
+                  <i
+                    class="bx bxl-tiktok mx-2 text-lg border-solid border-2 border-[#F5F5DC] p-2 rounded-full"
+                  ></i>
+                </div>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script src="/portofolio/public/js/slider.js"></script>
+    <script src="/portofolio/public/js/search.js"></script>
+    <script src="/portofolio/public/js/nav.js"></script>
+  </body>
+</html>
